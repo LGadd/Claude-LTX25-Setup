@@ -43,6 +43,10 @@ html[data-tier="t8"] :is(.t-16, .t-12):not(.t-8) { display: none !important; }
 .osswitch button[aria-pressed="true"] { background: var(--amber); color: #111; }
 .osswitch button:focus-visible { outline: 2px solid var(--blue); outline-offset: -4px; }
 .osswitch svg { width: 18px; height: 18px; flex: none; }
+/* VRAM switch in step 03: same look as the OS switch, three columns, synced with the step 01 picker. */
+.vramswitch { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 0 18px; }
+.vramswitch button small { font: 500 12px var(--mono); opacity: .8; text-align: center; }
+@media (max-width: 560px) { .vramswitch button { flex-direction: column; gap: 2px; } }
 .osswitch .hint { font: 700 12px var(--mono); color: var(--amber); border: 1px solid var(--amber); padding: 1px 6px; }
 .osswitch button[aria-pressed="true"] .hint { display: none; }
 @media (max-width: 560px) { .osbar-lbl { display: none; } .osswitch .hint { display: none; } .osswitch button:not([aria-pressed="true"]) { color: var(--text); } }
@@ -301,6 +305,11 @@ pip install -r ComfyUI-GGUF/requirements.txt -r ComfyUI-KJNodes/requirements.txt
   <!-- 03 -->
   <section id="files">
     <div class="sh"><span class="num">03</span><h2>Download the model files</h2><span class="time">~20 min</span></div>
+    <div class="osswitch vramswitch" role="group" aria-label="Your VRAM">
+      <button type="button" data-set-tier="t16" aria-pressed="true">16 GB <small>RTX 50</small></button>
+      <button type="button" data-set-tier="t12" aria-pressed="false">12 GB <small>or 30/40 16 GB</small></button>
+      <button type="button" data-set-tier="t8" aria-pressed="false">8 GB <small>LTX-2.3</small></button>
+    </div>
     <p>Video models come in several parts: the model, text encoders, a video VAE, an <b>audio</b> VAE and an upscaler. Each goes in its own folder inside
       <code class="win">C:\ComfyUI_windows_portable\ComfyUI\models\</code><code class="lin">~/ComfyUI/models/</code>.
       <span class="t-16">About <b>42 GB</b> in total.</span><span class="t-12">About <b>35 GB</b> in total.</span><span class="t-8">About <b>34 GB</b> in total.</span></p>
